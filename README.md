@@ -10,6 +10,4 @@ This is an **Electronic Bug Tracking System** developed using Python and Flask.
 - EC2 deployment ready
 
 ## How to Run
-1. Clone the repo:
-   ```bash
-  https://github.com/shaikmohammadrafi77/CustomE-BugTracker.git
+git clone https://github.com/shaikmohammadrafi77/CustomE-BugTracker.git
