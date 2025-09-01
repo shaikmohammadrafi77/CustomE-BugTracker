@@ -1,5 +1,5 @@
 #!/bin/bash
-# Update packages
+
 yum update -y
 
 # Install Python 3.9 and git
@@ -9,12 +9,12 @@ yum install -y python3.9 python3.9-pip git
 # Upgrade pip
 python3.9 -m pip install --upgrade pip
 
-# Navigate to home directory
+
 cd /home/ec2-user
 
-# Clone your GitHub project (replace with your repo)
-git clone https://github.com/username/your-repo.git
-cd your-repo
+
+ git clone https://github.com/shaikmohammadrafi77/CustomE-BugTracker.git
+   cd CustomE-BugTracker
 
 # Create and activate virtual environment
 python3.9 -m venv venv
