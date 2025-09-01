@@ -12,4 +12,4 @@ This is an **Electronic Bug Tracking System** developed using Python and Flask.
 ## How to Run
 1. Clone the repo:
    ```bash
-  git clone  https://github.com/shaikmohammadrafi77/CustomE-BugTracker.git
+  https://github.com/shaikmohammadrafi77/CustomE-BugTracker.git
