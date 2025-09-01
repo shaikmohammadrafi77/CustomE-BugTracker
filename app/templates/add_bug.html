@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report a Bug</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: #4a6bdf;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .form-container {
+            padding: 30px;
+        }
+        
+        .form-section {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            color: #4a6bdf;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #4a6bdf;
+            box-shadow: 0 0 0 2px rgba(74, 107, 223, 0.2);
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .required::after {
+            content: " *";
+            color: #e74c3c;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #4a6bdf;
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: #3a5bd0;
+        }
+        
+        .btn-secondary {
+            background: #95a5a6;
+            margin-left: 10px;
+        }
+        
+        .btn-secondary:hover {
+            background: #7f8c8d;
+        }
+        
+        .form-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+        
+        .priority-high {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+        
+        .priority-medium {
+            color: #f39c12;
+            font-weight: 600;
+        }
+        
+        .priority-low {
+            color: #27ae60;
+            font-weight: 600;
+        }
+        
+        .file-upload {
+            display: flex;
+            align-items: center;
+        }
+        
+        .file-upload-btn {
+            background: #ecf0f1;
+            color: #7f8c8d;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-right: 15px;
+            transition: background 0.3s;
+        }
+        
+        .file-upload-btn:hover {
+            background: #dfe6e9;
+        }
+        
+        .file-name {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 600px) {
+            .form-footer {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .btn-secondary {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Report a Bug</h1>
+            <p class="subtitle">Help us improve by reporting any issues you've encountered</p>
+        </header>
+        
+        <div class="form-container">
+            <form method="POST">
+                <div class="form-section">
+                    <h2 class="section-title"><i class="fas fa-bug"></i> Basic Information</h2>
+                    
+                    <div class="form-group">
+                        <label for="title" class="required">Bug Title</label>
+                        <input type="text" id="title" name="title" placeholder="Briefly describe the issue" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description" class="required">Description</label>
+                        <textarea id="description" name="description" placeholder="Please provide a detailed description of the bug, including steps to reproduce it..." required></textarea>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h2 class="section-title"><i class="fas fa-tasks"></i> Additional Details</h2>
+                    
+                    <div class="form-group">
+                        <label for="component">Affected Component/Feature</label>
+                        <input type="text" id="component" name="component" placeholder="e.g., Login System, Dashboard, Payment Processing">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="priority">Priority</label>
+                        <select id="priority" name="priority">
+                            <option value="low">Low - Minor inconvenience</option>
+                            <option value="medium" selected>Medium - Affects functionality but has workaround</option>
+                            <option value="high">High - Critical functionality impaired</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="browser">Browser (if applicable)</label>
+                        <select id="browser" name="browser">
+                            <option value="">Select a browser</option>
+                            <option value="chrome">Chrome</option>
+                            <option value="firefox">Firefox</option>
+                            <option value="safari">Safari</option>
+                            <option value="edge">Edge</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h2 class="section-title"><i class="fas fa-paperclip"></i> Attachments</h2>
+                    
+                    <div class="form-group">
+                        <label>Screenshots or Files</label>
+                        <div class="file-upload">
+                            <div class="file-upload-btn" onclick="document.getElementById('file').click()">
+                                <i class="fas fa-upload"></i> Choose Files
+                            </div>
+                            <span class="file-name" id="file-name">No files selected</span>
+                            <input type="file" id="file" name="file" style="display: none;" onchange="updateFileName()" multiple>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-footer">
+                    <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Submit Bug Report</button>
+                    <a href="{{ url_for('main.index') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to Bugs</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function updateFileName() {
+            const fileInput = document.getElementById('file');
+            const fileName = document.getElementById('file-name');
+            
+            if (fileInput.files.length > 0) {
+                if (fileInput.files.length === 1) {
+                    fileName.textContent = fileInput.files[0].name;
+                } else {
+                    fileName.textContent = `${fileInput.files.length} files selected`;
+                }
+            } else {
+                fileName.textContent = 'No files selected';
+            }
+        }
+        
+        // Simple form validation
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const title = document.getElementById('title');
+            const description = document.getElementById('description');
+            
+            if (!title.value.trim()) {
+                e.preventDefault();
+                title.focus();
+                alert('Please provide a title for the bug report.');
+                return;
+            }
+            
+            if (!description.value.trim()) {
+                e.preventDefault();
+                description.focus();
+                alert('Please provide a description of the bug.');
+                return;
+            }
+        });
+    </script>
+</body>
+</html>
