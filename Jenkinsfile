@@ -1,5 +1,5 @@
 pipeline {
-    agent any   // run on any Jenkins agent (node)
+    agent any
 
     stages {
         stage('Checkout') {
@@ -10,20 +10,33 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'echo "■ Building project..."'
+                sh '''
+                  echo "■ Building project..."
+                  python3 -m venv venv
+                  . venv/bin/activate
+                  pip install --upgrade pip
+                  pip install -r requirements.txt
+                  pip install pytest
+                '''
             }
         }
 
         stage('Test') {
             steps {
-                sh 'echo "■ Running tests..."'
-                sh 'pytest tests/'   // remove || true if you want failures to stop pipeline
+                sh '''
+                  echo "■ Running tests..."
+                  . venv/bin/activate
+                  pytest tests/
+                '''
             }
         }
 
         stage('Deploy') {
+            when {
+                expression { currentBuild.result == null || currentBuild.result == 'SUCCESS' }
+            }
             steps {
-                sh 'echo "■ Deploying project to server..."'
+                sh 'echo "■ Deploying project..."'
             }
         }
     }
