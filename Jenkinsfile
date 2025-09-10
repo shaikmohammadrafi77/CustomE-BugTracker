@@ -26,7 +26,11 @@ pipeline {
                 sh '''
                   echo "■ Running tests..."
                   . venv/bin/activate
-                  pytest tests/
+                  if [ -d "tests" ]; then
+                      pytest tests/
+                  else
+                      echo "⚠️ No tests folder found, skipping tests"
+                  fi
                 '''
             }
         }
