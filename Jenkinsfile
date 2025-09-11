@@ -24,20 +24,18 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
-            steps {
-                sshagent(['ec2-key']) {  // Uses the EC2 private key stored in Jenkins
-                    sh """
-                    ssh $EC2_USER@$EC2_IP \"
-                    cd $APP_DIR &&
-                    git pull &&
-                    source venv/bin/activate &&
-                    pip install -r requirements.txt &&
-                    nohup python3 app.py > app.log 2>&1 &
-                    \"
-                    """
-                }
-            }
+       stage('Deploy') {
+    steps {
+        sshagent(['ec2-key']) {
+            sh """
+            ssh ec2-user@13.235.13.243 '
+            cd /home/ec2-user/myapp &&
+            git pull &&
+            source venv/bin/activate &&
+            pip install -r requirements.txt &&
+            sudo systemctl restart myapp.service
+            '
+            """
         }
     }
 }
