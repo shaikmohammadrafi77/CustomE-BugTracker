@@ -4,7 +4,7 @@ yum update -y
 
 # Install Python 3.9 and git
 amazon-linux-extras enable python3.9
-yum install -y python3.9 python3.9-pip git
+yum install -y python3.9 python3.9-pip git  
 
 # Upgrade pip
 python3.9 -m pip install --upgrade pip
