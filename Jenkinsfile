@@ -1,7 +1,7 @@
 pipeline{
   agent any
   stages{
-    stage('checkout'){
+    stage('checkout'){ 
       steps{
         echo 'download source code '
         git branch: 'main', url: 'https://github.com/shaikmohammadrafi77/CustomE-BugTracker.git ...'
