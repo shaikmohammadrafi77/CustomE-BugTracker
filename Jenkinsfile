@@ -54,7 +54,7 @@ pipeline {
                         pip install --upgrade pip
                         pip install -r requirements.txt
 
-                        pkill -f "python3 app.py" || true
+                        sudo pkill -f "python3 app.py" || true
 
                         nohup python3 app.py > app.log 2>&1 &
                     '
