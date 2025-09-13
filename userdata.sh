@@ -16,7 +16,7 @@ cd /home/ec2-user
  git clone https://github.com/shaikmohammadrafi77/CustomE-BugTracker.git
    cd CustomE-BugTracker
 
-# Create and activate virtual environment
+# Create and activate virtual environment   
 python3.9 -m venv venv
 source venv/bin/activate
 
