@@ -55,7 +55,7 @@ pipeline {
                         pip install --upgrade pip
                         pip install -r requirements.txt
 
-                        sudo "python.*run.py" || true
+                        sudo "python run.py" || true
 
                         nohup /home/$EC2_USER/$APP_NAME/venv/bin/python run.py > app.log 2>&1 &
 
