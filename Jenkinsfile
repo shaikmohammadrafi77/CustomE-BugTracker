@@ -57,7 +57,8 @@ pipeline {
 
                         sudo python3 run.py || true
 
-                        nohup python3 run.py > app.log 2>&1 &
+                        nohup /home/$EC2_USER/$APP_NAME/venv/bin/python run.py > app.log 2>&1 &
+
                     '
                     """
                 }
