@@ -56,7 +56,7 @@ pipeline {
                         pip install -r requirements.txt
                         
 
-                        nohup /home/ec2-user/app/venv/bin/python run.py > app.log 2>&1 &
+                        nohup /home/ec2-user/app/venv/bin/python run.py > app.log 2>&2 &
 
                     
                     '
