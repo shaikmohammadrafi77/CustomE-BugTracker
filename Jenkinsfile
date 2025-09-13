@@ -4,7 +4,7 @@ pipeline {
     environment {
         EC2_USER = "ec2_user"
         EC2_HOST = "13.127.209.113"
-        SSH_CREDENTIALS = "jenkins-id"
+        SSH_CREDENTIALS = "project_id"
         APP_NAME = "app"
     }
 
