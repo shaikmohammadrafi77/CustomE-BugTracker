@@ -54,8 +54,11 @@ pipeline {
                         . venv/bin/activate
                         pip install --upgrade pip
                         pip install -r requirements.txt
-                        sudo python3 app.py  || true
-                        nohup /home/ec2-user/app/venv/bin/python3 run.py > app.log 2>&1 &
+                         # Stop any existing Flask app
+                        pkill -f run.py || true
+
+                         # Start Flask app in background
+                        nohup ./venv/bin/python run.py > app.log 2>&1 &
                         
 
                         
