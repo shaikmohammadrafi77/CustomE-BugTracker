@@ -26,7 +26,7 @@ You can access the project on GitHub:
 - EC2 deployment ready with `userdata.sh`
 
 ## How to Run Locally
-1. **Clone the repository**:
+1. **Clone the repository**: : "
    ```bash
    git clone https://github.com/shaikmohammadrafi77/CustomE-BugTracker.git
    cd CustomE-BugTracker
