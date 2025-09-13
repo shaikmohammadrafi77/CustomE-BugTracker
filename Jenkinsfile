@@ -38,6 +38,7 @@ pipeline {
         stage('Deploy to EC2') {
             steps {
                 sshagent([env.SSH_CREDENTIALS]) {
+                     sh "ssh -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} 'mkdir -p /home/${EC2_USER}/${APP_NAME}'"
                     sh """
                     ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST '
                         mkdir -p /home/$EC2_USER/$APP_NAME
