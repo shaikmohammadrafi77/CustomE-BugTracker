@@ -55,7 +55,7 @@ pipeline {
                         pip install --upgrade pip
                         pip install -r requirements.txt
                          # Kill any existing process
-                        pkill -f "python run.py" || true
+                        sudo "python run.py" || true
 
                         # Start Flask app in background
                        nohup /home/$EC2_USER/$APP_NAME/venv/bin/python /home/$EC2_USER/$APP_NAME/run.py > app.log 2>&1 &
