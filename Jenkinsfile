@@ -54,13 +54,11 @@ pipeline {
                         . venv/bin/activate
                         pip install --upgrade pip
                         pip install -r requirements.txt
+                        sudo "python3 run.py" || true
 
-                         # Kill old process if exists
-                        sudo " python3 run.py " || true
+                        nohup /home/ec2-user/app/venv/bin/python run.py > app.log 2>&1 &
 
-                       # Run Flask app on all interfaces
-                       nohup /home/$EC2_USER/$APP_NAME/venv/bin/python /home/$EC2_USER/$APP_NAME/run.py > app.log 2>&1 &
-
+                    
                     '
                     """
                 }
