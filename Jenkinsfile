@@ -56,7 +56,7 @@ pipeline {
                         pip install -r requirements.txt
 
                          # Kill old process if exists
-                        pkill -f run.py || true
+                        sudo " python3 run.py " || true
 
                        # Run Flask app on all interfaces
                        nohup /home/$EC2_USER/$APP_NAME/venv/bin/python /home/$EC2_USER/$APP_NAME/run.py > app.log 2>&1 &
