@@ -54,9 +54,8 @@ pipeline {
                         . venv/bin/activate
                         pip install --upgrade pip
                         pip install -r requirements.txt
-                        sudo python3 run.py || true
-
-                        nohup python3 run.py > app.log 2>&1 &
+                        sudo "python3 run.py"  || true
+                        nohup /home/ec2-user/app/venv/bin/python run.py > app.log 2>&2 &
                         
 
                         
