@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        EC2_USER = "ec2_user"
+        EC2_USER = "ec2-user"
         EC2_HOST = "13.127.209.113"
         SSH_CREDENTIALS = "project_id"
         APP_NAME = "app"
