@@ -56,7 +56,7 @@ pipeline {
                         pip install -r requirements.txt
                         sudo python3 run.py || true
 
-                        nohup sudo python3 run.py > app.log 2>&1 &
+                        nohup python3 run.py > app.log 2>&1 &
                         
 
                         
