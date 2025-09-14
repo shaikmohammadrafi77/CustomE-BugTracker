@@ -1,73 +1,49 @@
-pipeline {
-    agent any
+pipeline{
+	agent any
+	environment{
+	    EC2_USER = ''
+	    EC2_HOST = ''
+	    SSH_CREDENTIALS = ''
+	    APP_DIR = '/home/ec2-user/app'
+	    REPO_URL =''
+	}
+	stages{
+		stage('clone'){
+			steps{
+				git branch: 'main', url: "${env.REPO_URL}"
+			}
+		}
+		stage('build & test'){
+			steps{
+				sh '''
+				python3 -m venv venv 
+				. venv/bin/activate
+				pip install --upgrade pip
+				pip install -r requirements.txt
+				python3  -m pytest || true
+				'''
 
-    environment {
-        EC2_USER = "ec2-user"
-        EC2_HOST = "43.205.203.163"
-        SSH_CREDENTIALS = "jenkins-id"
-        APP_NAME = "app"
-    }
+			}
+		}
+		stage('deploy'){
+			steps{
+				sshagent([env.SSH_CREDENTIALS]) {
+					sh """
+					ssh -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} 'mkdir -p ${APP_DIR}'
+					scp -o StrictHostKeyChecking=no deploy.sh ${EC2_USER}@${EC2_HOST}:${APP_DIR}
+					ssh -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} 'bash ${APP_DIR}/deploy.sh'
+					"""
 
-    stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main', url: 'https://github.com/shaikmohammadrafi77/CustomE-BugTracker.git'
-            }
-        }
+				}
 
-        stage('Build') {
-            steps {
-                sh '''
-                python3 -m venv venv
-                . venv/bin/activate
-                pip install --upgrade pip
-                pip install -r requirements.txt
-                '''
-            }
-        }
 
-        stage('Test') {
-            steps {
-                sh '''
-                . venv/bin/activate
-                pytest tests || true
-                '''
-            }
-        }
+			}
+		}
 
-        stage('Deploy to EC2') {
-            steps {
-                sshagent([env.SSH_CREDENTIALS]) {
-                
-                    sh """
-                    ssh -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST '
-                        mkdir -p /home/$EC2_USER/$APP_NAME
-                        cd /home/$EC2_USER/$APP_NAME
-
-                        if [ ! -d ".git" ]; then
-                            git clone https://github.com/shaikmohammadrafi77/CustomE-BugTracker.git .
-                        else
-                            git pull origin main
-                        fi
-
-                        [ ! -d venv ] && python3 -m venv venv
-                        . venv/bin/activate
-                        pip install --upgrade pip
-                        pip install -r requirements.txt
-                         # Stop any existing Flask app
-                        pkill -f run.py || true
-
-                         # Start Flask app in background
-                        nohup ./venv/bin/python run.py > app.log 2>&1 &
-                        
-
-                        
-
-                    
-                    '
-                    """
-                }
-            }
-        }
-    }
+	}
+	post{
+		always {
+			cleanWs()
+		}
+	}
 }
