@@ -2,7 +2,7 @@ pipeline{
 	agent any
 	environment{
 	    EC2_USER = 'ec2-user'
-	    EC2_HOST = ''
+	    EC2_HOST = '13.233.138.243'
 	    SSH_CREDENTIALS = 'jenkins-id'
 	    APP_DIR = '/home/ec2-user/app'
 	    REPO_URL ='https://github.com/shaikmohammadrafi77/CustomE-BugTracker.git'
