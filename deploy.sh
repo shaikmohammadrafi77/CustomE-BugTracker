@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 cd ${APP_DIR}
-git pull origin main
+git clone https://github.com/shaikmohammadrafi77/CustomE-BugTracker.git
 
 python3 -m venv venv
 . venv/bin/activate
