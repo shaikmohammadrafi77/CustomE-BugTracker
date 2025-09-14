@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 cd /home/ec2-user/CustomE-BugTracker
-git clone https://github.com/shaikmohammadrafi77/CustomE-BugTracker.git
+git pull origin main
 
 python3 -m venv venv
 . venv/bin/activate
