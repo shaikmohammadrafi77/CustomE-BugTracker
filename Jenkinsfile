@@ -1,11 +1,11 @@
 pipeline{
 	agent any
 	environment{
-	    EC2_USER = ''
+	    EC2_USER = 'ec2-user'
 	    EC2_HOST = ''
-	    SSH_CREDENTIALS = ''
+	    SSH_CREDENTIALS = 'jenkins-id'
 	    APP_DIR = '/home/ec2-user/app'
-	    REPO_URL =''
+	    REPO_URL ='https://github.com/shaikmohammadrafi77/CustomE-BugTracker.git'
 	}
 	stages{
 		stage('clone'){
