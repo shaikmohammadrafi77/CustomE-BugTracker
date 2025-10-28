@@ -3,7 +3,7 @@ pipeline{
 	agent any
 	environment{
 	    EC2_USER = 'ec2-user'
-	    EC2_HOST = '13.233.100.187'
+	    EC2_HOST = '13.201.103.121'
 	    SSH_CREDENTIALS = 'jenkins-id'
 	    APP_DIR = '/home/ec2-user/app'
 	    REPO_URL ='https://github.com/shaikmohammadrafi77/jenkins_project.git'
