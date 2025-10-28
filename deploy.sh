@@ -2,23 +2,11 @@
 set -e
 
 APP_DIR="/home/ec2-user/bug_tracker"
-REPO_URL="https://github.com/shaikmohammadrafi77/CustomE-BugTracker.git"
 
 echo "🚀 Starting deployment in $APP_DIR..."
-cd /home/ec2-user
+cd "$APP_DIR"
 
-# Clone or pull the repository
-if [ -d "$APP_DIR/.git" ]; then
-    echo "📥 Pulling latest changes..."
-    cd "$APP_DIR"
-    git pull origin main
-else
-    echo "📥 Cloning repository..."
-    rm -rf "$APP_DIR"
-    git clone "$REPO_URL" "$APP_DIR"
-    cd "$APP_DIR"
-fi
-
+echo "📁 Current directory: $(pwd)"
 echo "📄 Files in directory:"
 ls -la
 
@@ -28,14 +16,12 @@ if [ ! -f "requirements.txt" ]; then
     exit 1
 fi
 
-# Create virtual environment if it doesn't exist
-if [ ! -d "venv" ]; then
-    echo "🐍 Creating virtual environment..."
-    python3 -m venv venv
-fi
+# Create virtual environment
+echo "🐍 Setting up virtual environment..."
+python3 -m venv venv
+source venv/bin/activate
 
 echo "📦 Installing dependencies..."
-source venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt
 
@@ -55,13 +41,10 @@ echo "📝 Application started with PID: $APP_PID"
 sleep 5
 if ps -p $APP_PID > /dev/null; then
     echo "✅ Deployment successful! Application is running."
-    echo "🔍 Check application: http://$(curl -s ifconfig.me):5000"
     echo "📜 View logs: tail -f $APP_DIR/app.log"
 else
     echo "❌ ERROR: Application failed to start!"
-    if [ -f "$APP_DIR/app.log" ]; then
-        echo "=== Last 20 lines of app.log ==="
-        tail -20 "$APP_DIR/app.log"
-    fi
+    echo "📜 Check the logs:"
+    tail -20 "$APP_DIR/app.log"
     exit 1
 fi
