@@ -5,12 +5,11 @@ pipeline {
         EC2_HOST = '13.201.103.121'
         SSH_CREDENTIALS = 'jenkins-id'
         APP_DIR = '/home/ec2-user/bug_tracker'
-        REPO_URL = 'https://github.com/shaikmohammadrafi77/CustomE-BugTracker.git'
     }
     stages {
         stage('clone') {
             steps {
-                git branch: 'main', url: "${env.REPO_URL}"
+                git branch: 'main', url: 'https://github.com/shaikmohammadrafi77/CustomE-BugTracker.git'
             }
         }
         stage('build & test') {
@@ -29,9 +28,13 @@ pipeline {
             steps {
                 sshagent([env.SSH_CREDENTIALS]) {
                     sh """
-                        # Just copy the deploy.sh script
-                        ssh -o StrictHostKeyChecking=no ${env.EC2_USER}@${env.EC2_HOST} 'mkdir -p ${env.APP_DIR}'
-                        scp -o StrictHostKeyChecking=no deploy.sh ${env.EC2_USER}@${env.EC2_HOST}:${env.APP_DIR}/
+                        # Clean and recreate directory
+                        ssh -o StrictHostKeyChecking=no ${env.EC2_USER}@${env.EC2_HOST} 'rm -rf ${env.APP_DIR} && mkdir -p ${env.APP_DIR}'
+                        
+                        # Copy all files except venv
+                        tar --exclude='venv' --exclude='.git' -czf - . | ssh -o StrictHostKeyChecking=no ${env.EC2_USER}@${env.EC2_HOST} 'cd ${env.APP_DIR} && tar -xzf -'
+                        
+                        # Run deployment
                         ssh -o StrictHostKeyChecking=no ${env.EC2_USER}@${env.EC2_HOST} 'cd ${env.APP_DIR} && chmod +x deploy.sh && bash deploy.sh'
                     """
                 }
