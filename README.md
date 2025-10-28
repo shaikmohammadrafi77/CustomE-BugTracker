@@ -2,7 +2,7 @@
 
 ## Project Overview
 This is an **Electronic Bug Tracking System** developed using Python and Flask.    
-It allows software teams to **record, assign, and resolve bugs**   
+It allows software teams to **record, assign, and resolve bugs** ffv  
 
 ## Repository
 You can access the project on GitHub:  
