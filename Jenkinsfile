@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         EC2_USER = 'ec2-user'
-        EC2_HOST = '3.108.54.226'
+        EC2_HOST = '3.110.90.92'
         SSH_CREDENTIALS = 'jenkins-id'
         APP_DIR = '/home/ec2-user/bug_tracker'
     }
