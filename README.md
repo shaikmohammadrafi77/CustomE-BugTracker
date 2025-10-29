@@ -17,7 +17,7 @@ sudo systemctl status jenkins
 
 
 
-# Custom E-Bug Tracker
+
 
 
 
