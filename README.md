@@ -19,6 +19,8 @@ sudo systemctl status jenkins
 
 # Custom E-Bug Tracker
 
+# Custom E-Bug Tracker
+
 ## Project Overview
 This is an **Electronic Bug Tracking System** developed using Python and Flask.    
 It allows software teams to **record, assign, and resolve bugs** 
