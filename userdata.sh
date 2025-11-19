@@ -4,28 +4,29 @@ yum update -y
 
 # Install Python 3.9 and git
 amazon-linux-extras enable python3.9
-yum install -y python3.9 python3.9-pip git  
+yum install -y python3.9 python3.9-pip git
 
-#upgrade pip
-python3.9 -m pip install --upgrade pip   
-
+# Upgrade pip
+python3.9 -m pip install --upgrade pip
 
 cd /home/ec2-user
 
+# Clone your actual repository
+git clone https://github.com/shaikmohammadrafi77/e-bugtracker.git
 
- git clone https://github.com/shaikmohammadrafi77/CustomE-BugTracker.git
-   cd CustomE-BugTracker
+# Move into project folder
+cd e-bugtracker/Project
 
-# Create and activate virtual environment   
+# Create virtual environment
 python3.9 -m venv venv
 source venv/bin/activate
 
-# Install project dependencies
+# Install dependencies
 pip install -r requirements.txt
 
-# Export Flask app environment variable
-export FLASK_APP=run.py
-export FLASK_ENV=development  # change to production if needed
+# Set Flask environment variables
+export FLASK_APP=app.py
+export FLASK_ENV=development
 
-# Run the Flask app on 0.0.0.0 so it's accessible publicly
+# Run Flask application
 nohup flask run --host=0.0.0.0 --port=5000 &
